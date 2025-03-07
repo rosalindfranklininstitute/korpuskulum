@@ -29,7 +29,7 @@ def load_membrane(file_in) -> npt.NDArray[any]:
 
 
 def load_coords(file_in, *, order="zxy") -> npt.NDArray[any]:
-    data = np.loadtxt(txt_in).astype(int)
+    data = np.loadtxt(file_in).astype(int)
 
     # Reorder coordinates to zxy if needed
     numerical_order = [order.lower().index(i) for i in "zxy"]
