@@ -164,3 +164,7 @@ tags
 
 # Ignore setuptools-scm version file
 _version.py
+
+# Ignore temp files from text editors
+*#
+*~
