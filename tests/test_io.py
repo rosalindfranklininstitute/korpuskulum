@@ -59,4 +59,7 @@ class IOSmokeTest(unittest.TestCase):
         assert n_order_reorder==[2, 0, 1], \
             "Error in io.load_coords: Output numerical order wrong (should be [2,0,1])."
         
-            
+
+    @classmethod
+    def tearDownClass(self):
+        pass
