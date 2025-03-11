@@ -17,10 +17,15 @@ dependencies = [
     "scipy",
     "scikit-learn",
     "matplotlib",
-    "tqdm"
+    "tqdm",
+    "rich",
+    "typer"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+korpus = "korpuskulum.main:app"

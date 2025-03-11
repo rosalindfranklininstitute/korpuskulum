@@ -12,12 +12,45 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+from pathlib import Path
+from glob import glob
 
 import numpy as np
 import numpy.typing as npt
 
 import tifffile
 
+
+def parse_membrane_input(path_in: str) -> list:
+    # Check if input format correct
+    assert Path(path_in).suffix==".txt" or Path(path_in).is_dir(), \
+        "Error in korpus.io:parse_membrane_input: Given input must be either a txt file or a folder."
+
+    # Checks if given path is a txt file
+    if Path(path_in).suffix==".txt":
+        with open(Path(path_in)) as f:
+            membrane_files = [p:=Path(l.rstrip()) for l in f if p.suffix in [".tif", ".tiff"]]
+    else:
+        membrane_files = glob(f"{path_in}/*.tif") + glob(f"{path_in}/*.tiff")
+
+    return membrane_files
+
+
+def parse_coords_input(path_in: str) -> list:
+    # Check if input format correct
+    assert Path(path_in).suffix==".txt" or Path(path_in).is_dir(), \
+        "Error in korpus.io:parse_coords_input: Given input must be either a txt file or a folder."
+
+    # Checks if given path is a txt file
+    if Path(path_in).suffix==".txt":
+        with open(Path(path_in)) as f:
+            coords_files = [p:=Path(l.rstrip()) for l in f if p.suffix==".txt"]
+    else:
+        coords_files = glob(f"{path_in}/*.txt")
+
+    return coords_files
+
+    
 
 def load_membrane(file_in) -> npt.NDArray[any]:
     try:

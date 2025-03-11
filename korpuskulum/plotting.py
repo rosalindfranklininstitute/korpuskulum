@@ -18,6 +18,7 @@ import numpy as np
 import numpy.typing as npt
 
 import matplotlib as mpl
+mpl.use("Agg")
 import matplotlib.pyplot as plt
 
 
@@ -114,7 +115,7 @@ def plot_min_dist_hist(dist_array: npt.NDArray[any],
     Returns:
     None
     """
-    crit_1 = (orientation == 1)
+    crit_1 = (orientations == 1)
     crit_2 = np.logical_and(
         dist_low <= dist_array,
         dist_array <= dist_high,
@@ -137,4 +138,4 @@ def plot_min_dist_hist(dist_array: npt.NDArray[any],
 
     if savefig is not None:
         fig.savefig(savefig)
-        plt.close(fig)
+        plt.close()

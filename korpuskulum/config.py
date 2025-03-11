@@ -12,6 +12,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+import typing
 
 from korpuskulum import objects
 
@@ -20,7 +21,8 @@ def objectify_user_input(
         pixel_size_nm: typing.Optional[float],
         dist_range: typing.Optional[list],
         coords_files: typing.Optional[list],
-        membrane_files: typing.Optional[list]
+        membrane_files: typing.Optional[list],
+        order: typing.Optional[str]
 ) -> objects.Config:
     """Objectifying user-provided input as a Config object
 
@@ -29,6 +31,7 @@ def objectify_user_input(
     dist_range (list)     : List of floats indicating the range of accepted particle-membrane distances: [min, max]
     coords_files (list)   : List of files containing coordinates of picked particles
     membrane_files (list) : List of files containing 3D maps of segmented membranes
+    order (str)           : Order of coordinates in which particle coordinates are represented
 
     Returns:
     Config

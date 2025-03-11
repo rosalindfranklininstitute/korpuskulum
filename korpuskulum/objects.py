@@ -14,12 +14,13 @@
 
 
 from dataclasses import dataclass
-from typing import Optional
+import typing
 
 
-@dataclass():
+@dataclass()
 class Config:
     pixel_size_nm: typing.Optional[float] = None
     dist_range: typing.Optional[list] = None
     coords_files: typing.Optional[list] = None
     membrane_files: typing.Optional[list] = None
+    order: typing.Optional[str] = None
