@@ -1,9 +1,12 @@
-# python-template
+# Korpuskulum
 
-This is an example python repository that can be used as a template for other projects
+A package for evaluating particle distribution with respect to segmented membranes.
+
+_Etymology: Corpuscle is an English word meaning a tiny particle, derived from the Latin "corpusculum"._
+
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-[![Building](https://github.com/rosalindfranklininstitute/python-template/actions/workflows/python-package.yml/badge.svg)](https://github.com/rosalindfranklininstitute/python-template/actions/workflows/python-package.yml)
+[![Building](https://github.com/rosalindfranklininstitute/korpuskulum/actions/workflows/python-package.yml/badge.svg)](https://github.com/rosalindfranklininstitute/korpuskulum/actions/workflows/python-package.yml)
 
 ## Installation
 
@@ -22,9 +25,21 @@ pip install .[test]
 pytest
 ```
 
+## Basic usage
+
+You can run the package by using a combination of flags after the following command
+```
+korpus main
+```
+The flags and their respective usages can be displayed using the command
+```
+korpus main --help
+```
+
+
 ## Issues
 
-Please use the [GitHub issue tracker](https://github.com/rosalindfranklininstitute/python-template/issues) to submit bugs or request features.
+Please use the [GitHub issue tracker](https://github.com/rosalindfranklininstitute/korpuskulum/issues) to submit bugs or request features.
 
 ## Contributions
 
