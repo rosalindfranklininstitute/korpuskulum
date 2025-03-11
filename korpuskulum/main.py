@@ -24,6 +24,8 @@ import re
 
 import typer
 import numpy as np
+import pandas as pd
+import starfile
 
 from korpuskulum import (config, io, evaluate, plotting, prog_bar)
 
@@ -120,10 +122,6 @@ def main(
         membrane_files=membrane_list,
         order=coords_order,
     )
-
-    # Create lists for intermediary storage of filtered particles
-    side1_full_list = []
-    side0_full_list = []
     
     # Evaluation loops
     with prog_bar.prog_bar as p:
@@ -193,3 +191,7 @@ def main(
                            side_0[:, order_in[::-1]],
                            fmt="%4d")
                 
+    # Export index-file conversion table
+    conversion_df = io.export_conversion_table(membrane_list=membrane_list,
+                                               coords_list=coords_list)
+    starfile.write(conversion_df, "./conversion_lookup.star")

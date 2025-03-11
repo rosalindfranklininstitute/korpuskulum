@@ -19,7 +19,9 @@ dependencies = [
     "matplotlib",
     "tqdm",
     "rich",
-    "typer"
+    "typer",
+    "starfile",
+    "pandas"
 ]
 
 

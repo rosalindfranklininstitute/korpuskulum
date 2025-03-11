@@ -12,11 +12,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+from itertools import product
 from pathlib import Path
 from glob import glob
 
 import numpy as np
 import numpy.typing as npt
+
+import pandas as pd
 
 import tifffile
 
@@ -33,7 +36,7 @@ def parse_membrane_input(path_in: str) -> list:
     else:
         membrane_files = glob(f"{path_in}/*.tif") + glob(f"{path_in}/*.tiff")
 
-    return membrane_files
+    return sorted(membrane_files)
 
 
 def parse_coords_input(path_in: str) -> list:
@@ -48,11 +51,11 @@ def parse_coords_input(path_in: str) -> list:
     else:
         coords_files = glob(f"{path_in}/*.txt")
 
-    return coords_files
+    return sorted(coords_files)
 
     
 
-def load_membrane(file_in) -> npt.NDArray[any]:
+def load_membrane(file_in: str) -> npt.NDArray[any]:
     try:
         segm = tifffile.imread(file_in)
     except:
@@ -61,7 +64,9 @@ def load_membrane(file_in) -> npt.NDArray[any]:
     return segm
 
 
-def load_coords(file_in, *, order="zxy") -> npt.NDArray[any]:
+def load_coords(file_in: str,
+                *,
+                order: str="zxy") -> npt.NDArray[any]:
     data = np.loadtxt(file_in).astype(int)
 
     # Reorder coordinates to zxy if needed
@@ -69,3 +74,25 @@ def load_coords(file_in, *, order="zxy") -> npt.NDArray[any]:
     data = data[:, numerical_order]
 
     return data, numerical_order
+
+
+def export_conversion_table(membrane_list: list,
+                            coords_list: list) -> pd.DataFrame:
+    permutations_gen = product(range(len(membrane_list)),
+                               range(len(coords_list)))
+    permutations_array = np.array(list(permutations_gen)).T
+
+    membrane_idx = permutations_array[0]
+    coords_idx = permutations_array[1]
+    membrane_files = [membrane_list[i] for i in membrane_idx]
+    coords_files = [coords_list[i] for i in coords_idx]
+
+    data = dict(
+        membrane_index = membrane_idx,
+        particle_species = coords_idx,
+        membrane_file = membrane_files,
+        particle_file = coords_files
+    )
+    df = pd.DataFrame(data)
+
+    return df
