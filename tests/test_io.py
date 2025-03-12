@@ -55,15 +55,15 @@ class IOSmokeTest(unittest.TestCase):
         ), "Error in io.load_coords: Output data not an ndarray."
         assert coords.dtype == int, "Error in io.load_coords: Output data not integers."
         assert n_order == [
-            0,
-            1,
             2,
-        ], "Error in io.load_coords: Output numerical order wrong (should be [0,1,2])."
+            1,
+            0,
+        ], "Error in io.load_coords: Output numerical order wrong (should be [2,1,0])."
         assert n_order_reorder == [
-            2,
             0,
+            2,
             1,
-        ], "Error in io.load_coords: Output numerical order wrong (should be [2,0,1])."
+        ], "Error in io.load_coords: Output numerical order wrong (should be [0,2,1])."
 
     @classmethod
     def tearDownClass(self):
