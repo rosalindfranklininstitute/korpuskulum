@@ -19,11 +19,12 @@ import numpy.typing as npt
 from sklearn.metrics import pairwise_distances as PD
 
 
-def get_distribution(seg_map: npt.NDArray[any],
-                     coords: npt.NDArray[any],
-                     pixel_size_nm: float,
-                     *,
-                     slice_idx: list=[],
+def get_distribution(
+    seg_map: npt.NDArray[any],
+    coords: npt.NDArray[any],
+    pixel_size_nm: float,
+    *,
+    slice_idx: list = [],
 ) -> list:
     """Evaluates the distribution of particles for given slices.
     If slice indices are not given, evaluate the entire stack.
@@ -39,12 +40,12 @@ def get_distribution(seg_map: npt.NDArray[any],
     """
 
     full_distro_list = []
-    if len(slice_idx)==0:
+    if len(slice_idx) == 0:
         slice_idx = range(len(seg_map))
     else:
         for slice_no in slice_idx:
-            seg_mask = np.argwhere(seg_map[slice_no]==1)
-            trimmed_coords_slice = np.asarray([i for i in coords if i[0]==slice_no])
+            seg_mask = np.argwhere(seg_map[slice_no] == 1)
+            trimmed_coords_slice = np.asarray([i for i in coords if i[0] == slice_no])
             coords_slice_2d = trimmed_coords_slice[:, [2, 1]]
 
             try:
@@ -54,7 +55,9 @@ def get_distribution(seg_map: npt.NDArray[any],
             else:
                 min_dist = dmat.min(axis=0)
                 closest_args = np.argmin(dmat, axis=0)
-                distribution = (coords_slice_2d - seg_mask[closest_args]) * pixel_size_nm
+                distribution = (
+                    coords_slice_2d - seg_mask[closest_args]
+                ) * pixel_size_nm
                 slice_list = [slice_no] * len(distribution)
 
                 mask_fit_slope = np.polyfit(*seg_mask.T, deg=1)[0]
@@ -62,7 +65,9 @@ def get_distribution(seg_map: npt.NDArray[any],
                 if mask_fit_normal[1] > 0:
                     mask_fit_normal *= -1
 
-                orientations = (np.sum(distribution*mask_fit_normal, axis=1) >= 0).astype(int)
+                orientations = (
+                    np.sum(distribution * mask_fit_normal, axis=1) >= 0
+                ).astype(int)
 
                 full_distro_list.append(
                     (distribution, slice_list, orientations, trimmed_coords_slice)
