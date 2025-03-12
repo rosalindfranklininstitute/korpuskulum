@@ -21,7 +21,8 @@ dependencies = [
     "rich",
     "typer",
     "starfile",
-    "pandas"
+    "pandas",
+    "icecream"
 ]
 
 
