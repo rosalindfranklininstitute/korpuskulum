@@ -18,10 +18,11 @@ from glob import glob
 
 import numpy as np
 import numpy.typing as npt
-
 import pandas as pd
 
 import tifffile
+
+from icecream import ic
 
 
 def parse_membrane_input(path_in: str) -> list:
@@ -71,9 +72,10 @@ def load_coords(file_in: str,
 
     # Reorder coordinates to zxy if needed
     numerical_order = [order.lower().index(i) for i in "zxy"]
+    restoration_order = ["zxy".index(i) for i in order.lower()][::-1]
     data = data[:, numerical_order]
 
-    return data, numerical_order
+    return data, restoration_order
 
 
 def export_conversion_table(membrane_list: list,

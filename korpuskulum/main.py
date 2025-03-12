@@ -27,6 +27,8 @@ import numpy as np
 import pandas as pd
 import starfile
 
+from icecream import ic
+
 from korpuskulum import (config, io, evaluate, plotting, prog_bar)
 
 
@@ -133,7 +135,7 @@ def main(
             seg_nonempty = np.argwhere(np.sum(seg_map, axis=(1, 2))!=0).flatten()
 
             for (c_idx, c) in enumerate(coords_list):
-                coords, order_in = io.load_coords(c, order=params.order)
+                coords, restoration_order = io.load_coords(c, order=params.order)
 
                 # Calculate distributions
                 eval_slice_idx = np.intersect1d(seg_nonempty,
@@ -185,10 +187,10 @@ def main(
                                                         min_dist <= max(params.dist_range))) ]
 
                 np.savetxt(f"{output_folder}/coords/{file_prefix}_side_1.txt",
-                           side_1[:, order_in[::-1]],
+                           side_1[:, restoration_order],
                            fmt="%4d")
                 np.savetxt(f"{output_folder}/coords/{file_prefix}_side_0.txt",
-                           side_0[:, order_in[::-1]],
+                           side_0[:, restoration_order],
                            fmt="%4d")
                 
     # Export index-file conversion table
