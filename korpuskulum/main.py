@@ -32,7 +32,7 @@ from icecream import ic
 from korpuskulum import config, io, evaluate, plotting, prog_bar
 
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 
 def callback():
