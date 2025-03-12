@@ -35,7 +35,7 @@ def parse_membrane_input(path_in: str) -> list:
     if Path(path_in).suffix == ".txt":
         with open(Path(path_in)) as f:
             membrane_files = [
-                p := Path(l.rstrip()) for l in f if p.suffix in [".tif", ".tiff"]
+                Path(l.rstrip()) for l in f if l.suffix in [".tif", ".tiff"]
             ]
     else:
         membrane_files = glob(f"{path_in}/*.tif") + glob(f"{path_in}/*.tiff")
@@ -52,7 +52,7 @@ def parse_coords_input(path_in: str) -> list:
     # Checks if given path is a txt file
     if Path(path_in).suffix == ".txt":
         with open(Path(path_in)) as f:
-            coords_files = [p := Path(l.rstrip()) for l in f if p.suffix == ".txt"]
+            coords_files = [Path(l.rstrip()) for l in f if l.suffix == ".txt"]
     else:
         coords_files = glob(f"{path_in}/*.txt")
 
