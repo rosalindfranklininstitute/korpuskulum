@@ -39,7 +39,7 @@ def callback():
     pass
 
 
-def unique_rows(array_in):
+def _unique_rows(array_in):
     """Extract unique rows in an array.
     Could be useful for aggregating data.
     """
