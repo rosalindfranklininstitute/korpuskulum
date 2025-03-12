@@ -12,7 +12,7 @@ packages = [{include = "korpuskulum"}]
 
 requires-python = ">=3.10"
 dependencies = [
-    "tifffile (>=2025.2.18,<2026.0.0)",
+    "tifffile",
     "numpy",
     "scipy",
     "scikit-learn",
