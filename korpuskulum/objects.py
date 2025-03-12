@@ -1,4 +1,4 @@
-#   Copyright 2024 Rosalind Franklin Institute
+#   Copyright 2025 Rosalind Franklin Institute
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -13,16 +13,14 @@
 #   limitations under the License.
 
 
-def example(a, b):
-    """
-    This is an example function that add the values of a and b
+from dataclasses import dataclass
+import typing
 
-    Args:
-        a: The first value
-        b: The second value
 
-    Returns:
-        The sum of a and b
-
-    """
-    return a + b
+@dataclass()
+class Config:
+    pixel_size_nm: typing.Optional[float] = None
+    dist_range: typing.Optional[list] = None
+    coords_files: typing.Optional[list] = None
+    membrane_files: typing.Optional[list] = None
+    order: typing.Optional[str] = None

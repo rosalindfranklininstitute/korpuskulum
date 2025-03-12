@@ -7,17 +7,28 @@ authors = [
 ]
 license = {text = "Apache License V.3"}
 readme = "README.md"
+packages = [{include = "korpuskulum"}]
+
+
 requires-python = ">=3.10"
 dependencies = [
-    "tifffile (>=2025.2.18,<2026.0.0)",
+    "tifffile",
     "numpy",
     "scipy",
     "scikit-learn",
     "matplotlib",
-    "tqdm"
+    "tqdm",
+    "rich",
+    "typer",
+    "starfile",
+    "pandas",
+    "icecream"
 ]
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+korpus = "korpuskulum.main:app"
