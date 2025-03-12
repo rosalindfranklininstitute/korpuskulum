@@ -40,6 +40,9 @@ def callback():
 
 
 def unique_rows(array_in):
+    """Extract unique rows in an array.
+    Could be useful for aggregating data.
+    """
     sorted_idx = np.lexsort(array_in.T)
     sorted_array = array_in[sorted_idx, ...]
     row_mask = np.append([True], np.any(np.diff(sorted_array, axis=0), 1))
