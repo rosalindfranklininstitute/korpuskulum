@@ -18,11 +18,11 @@ from korpuskulum import objects
 
 
 def objectify_user_input(
-        pixel_size_nm: typing.Optional[float],
-        dist_range: typing.Optional[list],
-        coords_files: typing.Optional[list],
-        membrane_files: typing.Optional[list],
-        order: typing.Optional[str]
+    pixel_size_nm: typing.Optional[float],
+    dist_range: typing.Optional[list],
+    coords_files: typing.Optional[list],
+    membrane_files: typing.Optional[list],
+    order: typing.Optional[str],
 ) -> objects.Config:
     """Objectifying user-provided input as a Config object
 
