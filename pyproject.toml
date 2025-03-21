@@ -1,6 +1,10 @@
+[build-system]
+requires = ["poetry-core", "poetry-dynamic-versioning"]
+build-backend = "poetry.core.masonry.api"
+
 [project]
 name = "korpuskulum"
-version = "0.1.1"
+dynamic = ["version"]
 description = "Package to evaluate particle distribution with respect to segmented membranes"
 authors = [
     {name = "Neville B.-y. Yee"}
@@ -25,10 +29,16 @@ dependencies = [
     "icecream"
 ]
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.poetry-dynamic-versioning.from-file]
+source = "korpuskulum/__init__.py"
+pattern = '''^__version__\s*=\s*"([0-9]+\.[0-9]+\.[0-9]+.*?)"'''
 
+[tool.poetry]
+version = "0.0.0" # Placeholder only - change version number in __init__ file.
 [tool.poetry.scripts]
 korpus = "korpuskulum.main:app"
